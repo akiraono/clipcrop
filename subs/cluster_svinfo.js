@@ -33,11 +33,12 @@ function cluster_svinfo(input, config) {
     console.log(line.trim());
   });
 
-  var lines = new LineStream(input, {
-    fieldNum: 2,
-    fieldSep: "\t",
-    comment: "#"
-  });
+  //var lines = new LineStream(input, {
+  //  fieldNum: 2,
+  //  fieldSep: "\t",
+  //  comment: "#"
+  //});
+  var lines = new LineStream(input); //no format filter
 
   var clusters = {};
 
