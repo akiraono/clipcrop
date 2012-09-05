@@ -22,7 +22,7 @@ function cluster_svinfo(input, config) {
   // var RF_JSON  = (config.RF_JSON) ? require(config.RF_JSON) : null;
   // self.freader = new FASTAReader(RF_FASTA, RF_JSON);
 
-  var MAX_DIFF = config.MAX_DIFF || 3;
+  var SV_MAX_DIFF = config.SV_MAX_DIFF || 3;
   var MIN_CLUSTER_SIZE = config.MIN_CLUSTER_SIZE || 10;
   var SAVE_DIR = config.SAVE_DIR || (__dirname + '../');
 
@@ -89,11 +89,11 @@ function cluster_svinfo(input, config) {
     /**
      * checking if cluster and current are in different clusters
      **/
-    if( ( Math.abs(cluster.get('start') - current.start) > MAX_DIFF)
+    if( ( Math.abs(cluster.get('start') - current.start) > SV_MAX_DIFF)
       ||
-      ( current.type != 'INS' && current.type != 'CTX' && Math.abs(cluster.get('end') - current.end) > MAX_DIFF)
+      ( current.type != 'INS' && current.type != 'CTX' && Math.abs(cluster.get('end') - current.end) > SV_MAX_DIFF)
       ||
-      ( current.type == 'CTX' && Math.abs(cluster.get('start2') - current.start2) > MAX_DIFF)
+      ( current.type == 'CTX' && Math.abs(cluster.get('start2') - current.start2) > SV_MAX_DIFF)
     ) {
 
       printSVInfo.call(self, svcStream, clusters[key],
@@ -253,7 +253,7 @@ if (__filename == process.argv[1]) {
     RF_FASTA: process.argv[2],
     RF_JSON : process.argv[3],
     SAVE_DIR: process.argv[4],
-    MAX_DIFF: process.argv[5],
+    SV_MAX_DIFF: process.argv[5],
     MIN_CLUSTER_SIZE: process.argv[6]
   });
 }
