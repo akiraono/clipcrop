@@ -76,7 +76,23 @@ function SVClassifyStream(dir, options) {
     compare: function(sv1, sv2) {
       var score1 = Number(sv1.score);
       var score2 = Number(sv2.score);
-      return (score1 > score2) ? -1: 1; // order by score desc
+      //return (score1 > score2) ? -1: 1; // order by score desc
+      var start1 = Number(sv1.start);
+      var start2 = Number(sv2.start);
+      var rc;
+      if(score1 > score2){
+        rc = -1; //score is descending order
+      }else if(score1 < score2){
+        rc = 1;  //score is descending order
+      }else{ //score1 == score2
+        if(start1 > start2){
+          rc = 1; //start address is ascending order
+        }else{
+          rc = -1;
+        }
+      }
+      return rc;
+
     }
   });
 
